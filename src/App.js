@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { NavLink,Link } from 'react-router-dom';
+import Home from './Home.js';
+import Aboutus from './Aboutus.js';
+import FormComponent from './FormComponent.js';
+import Login from './Login.js';
+import PatientRecord from './PatientRecord.js';
+
 
 function App() {
+  
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+   <div>
+                                           
+
+<Switch>
+    <Route exact path="/" component={Home}></Route>
+    <Route exact path="/Login" component={Login}></Route>
+    <Route exact path="/FormComponent" component={FormComponent}></Route>
+    <Route exact path="/aboutus" component={Aboutus}></Route>
+    <Route exact path="/home" component={Home}></Route>
+    <Route exact path="/patientRecord" component={PatientRecord}></Route>
+</Switch>
+
     </div>
+    
   );
 }
 
