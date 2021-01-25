@@ -1,47 +1,39 @@
-import React, { Component } from 'react';
+
+import React,{Component, useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, BrowserRouter} from 'react-router-dom';
+
+import { useLocation } from 'react-router-dom';
 
 import { Nav, Navbar, NavbarBrand, NavbarToggler, Collapse, NavItem, Jumbotron } from '../node_modules/reactstrap';
 import { NavLink,Link } from 'react-router-dom';
-
+import './App.css';
 import logo1 from './logo1.png';
 import Aboutus from './Aboutus.js';
 import FormComponent from './FormComponent.js';
+import Home from './Home.js';
 import Login from './Login.js';
 
-import staff from './staff.jpg';
-import building from './building.jpg';
-import cafe from './cafe.jpg';
-import equipment from './equipment.jpg'
-
- class Home extends Component{
 
 
-    constructor(props) {
-        super(props);
+const DoctorsRecord=(props)=>{
+
+
     
-        this.toggleNav = this.toggleNav.bind(this);
-        this.state = {
-          isNavOpen: false
-        };
-      }
-
-      toggleNav() {
-        this.setState({
-          isNavOpen: !this.state.isNavOpen
-        });
-      }
-
      
+    const location=useLocation();
+    useEffect(()=>{
 
-    render()
-    {
+    },[])
 
-        
+
+    const patients=location.state.data;
+    
+       
+
+        console.log(location.state);
         
 
         return(
@@ -50,28 +42,25 @@ import equipment from './equipment.jpg'
 
 <Navbar bg="dark" expand="md">
                     <div className="container">
-                        <NavbarToggler onClick={this.toggleNav} />
+                        <NavbarToggler  />
                         <NavbarBrand className="mr-auto" href="/"><img src={logo1} height="30" width="41" alt='National Hospital' /></NavbarBrand>
-                        <Collapse isOpen={this.state.isNavOpen} navbar>
+                        <Collapse  navbar>
                             <Nav navbar>
                             <NavItem>
                                 <NavLink className="nav-link"  to='/home'><span className="fa fa-home fa-lg"></span> Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to='/aboutus'><span className="fa fa-info fa-lg"></span> About Us</NavLink>
+                                <NavLink className="nav-link" to='/aboutus' ><span className="fa fa-info fa-lg"></span> About Us</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className="nav-link" to='/FormComponent'><span className="fa fa-address-card fa-lg"></span> Sign Up</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink className="nav-link" to='/Login'><span className="fa fa-address-card fa-lg"></span> Login</NavLink>
+                                <NavLink className="nav-link" to='/Login' ><span className="fa fa-address-card fa-lg"></span> Logout</NavLink>
                             </NavItem>
                             </Nav>
                         </Collapse>
                     </div>
                 </Navbar>
 
-     <header class="jumbotron" style={{margin:0,paddingBottom:0}}>
+<header class="jumbotron" style={{margin:0,paddingBottom:0}}>
         <div class="container">
             <div class="col-12 col-sm align-self-center">
                 <img src={logo1} class="img-fluid"></img>
@@ -81,24 +70,41 @@ import equipment from './equipment.jpg'
         
     </header>
 
-<body style={{backgroundColor:"lightblue"}}>
-    <div class="row">
-
-<div class="col-6" style={{alignContent:'center'}}><h1 style={{textAlign:'center',textDecorationLine:'underline',color: "black",fontSize:"30px",fontStyle:"italic"}}>OUR BUILDING</h1> <img src={building} class="img-fluid"></img></div>
-<div class="col-6" style={{alignContent:'center'}}><h1 style={{textAlign:'center',textDecorationLine:'underline',color: "black",fontSize:"30px",fontStyle:"italic"}}>MODERN EQUIPMENTS</h1><img src={equipment} class="img-fluid" style={{height:400, width:500}}></img> </div>
-    </div>
-
-    <div class="row">
-
-    <div class="col-6" style={{alignContent:'center'}}><h1 style={{textAlign:'center',textDecorationLine:'underline',color: "black",fontSize:"30px",fontStyle:"italic"}}>CAFETARIA</h1><img src={cafe} class="img-fluid" style={{height:400, width:500}}></img> </div>
-    <div class="col-6" style={{alignContent:'center'}}><h1 style={{textAlign:'center',textDecorationLine:'underline',color: "black",fontSize:"30px",fontStyle:"italic"}}>OUR STAFF</h1><br/><img src={staff} class="img-fluid" ></img> </div>
-
-    </div>
+    <body style={{margin:0,paddingTop:0}}>
+        {
+ <div style={{backgroundColor:"red"}}>           
+<div class="row">
+<div class=" offset-1 col-sm-10" style={{backgroundColor: "lightblue", color: "black",fontSize:"30px",fontStyle:"italic"}}>
+<h1 style={{textAlign:'center',textDecorationLine:'underline'}}><b>WELCOME {patients[0].dname}</b><br/><b> YOUR PATIENTS ARE: </b></h1><br/>
 
 
-</body>
+            <table style={{border:"1px solid black",borderCollapse: "collapse", marginLeft:200}}>
+                 <tr>
+                <th>patient id</th>
+                <th>patient name</th>
+                </tr>
+                
+                {patients.map(patient=>{
+      return <tr>  <td>{patient.patient_id}</td> <td>{patient.name}</td> </tr>
+    })}
+                
+               
+               
 
-{/*footer*/}
+            </table>
+
+
+{/* <h1 style={{textAlign:'center'}}><b>MEDICAL HISTORY</b></h1><br/> */}
+
+
+</div>
+</div>
+</div>
+            /*   PATIENTS RECORD WILL BE INSERTED HERE */
+        }
+    </body>
+
+    {/*footer*/}
 
 <footer class="jumbotron">
                 <div class="container2">
@@ -110,14 +116,12 @@ import equipment from './equipment.jpg'
                     
                      {/*routing*/}
                     <ul class="list-unstyled">
-                      
+                  
                        
-                        <li><Link to='/home'>Home</Link></li>
-                        <li><Link to='/aboutus'>About Us</Link></li>
-                        <li><Link to='/FormComponent'>Sign Up</Link></li>
-                        <li><Link to='/Login'>Login</Link></li>
-                     
-                      
+                        <li><Link to='/home' >Home</Link></li>
+                        <li><Link to='/aboutus' >About Us</Link></li>
+                       
+                        
                     </ul>
 
                 </div>
@@ -149,9 +153,6 @@ import equipment from './equipment.jpg'
 
         );
 
-
-    }
-
 }
 
-export default Home;
+export default DoctorsRecord;

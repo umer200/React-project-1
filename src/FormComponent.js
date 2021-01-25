@@ -60,7 +60,7 @@ import Axios from "axios";
 
     //handling post request to create an entry in database
     addPatient = () => {
-        Axios.post(`http://localhost:3001/create`, {
+        Axios.post(`http://localhost:3001/createPatient`, {
           name: this.state.name,
           age: this.state.age,
           address: this.state.address,
@@ -84,6 +84,36 @@ import Axios from "axios";
               
         });
     };
+
+
+    //doctors entry request
+    addDoctor = () => {
+        Axios.post(`http://localhost:3001/createDoctor`, {
+          name: this.state.name,
+          age: this.state.age,
+          address: this.state.address,
+          phone: this.state.phone,
+          cnic: this.state.cnic,
+          password: this.state.password
+        }).then(res => {
+            
+             
+              this.setState([
+                ...this.state.userData,
+                {
+                    name: this.state.name,
+                    age: this.state.age,
+                    address: this.state.address,
+                    phone: this.state.phone,
+                    cnic: this.state.cnic,
+                    password: this.state.password
+                },
+              ]);
+              
+        });
+    };
+
+
 
     // Form Events
     onChangeName(e) {
@@ -145,7 +175,7 @@ import Axios from "axios";
         else error.password=null;
         if(!phone) error.phone="Please enter valid phone number ";
         else error.phone=null;
-        if(!cnic) error.phone="Please enter valid cnic number ";
+        if(!cnic) error.cnic="Please enter valid cnic number ";
         else error.cnic=null;
         if(!classification) error.classification="Please select a checkbox from classification";
         else error.classification=null;
@@ -177,8 +207,8 @@ import Axios from "axios";
             alert(errors.phone)
             else if (this.state.phone.length>12 || this.state.phone.length<12)
             alert("Phone number cannot be more than or less than 12 digits");
-            else if (this.state.cnic.length>11 || this.state.cnic.length<11)
-            alert("CNIC number should be 11 digits without dashes");
+            else if (this.state.cnic.length>13 || this.state.cnic.length<13)
+            alert("CNIC number should be 13 digits without dashes");
             else if (errors.address!=null)
             alert(errors.address)
             else if(errors.password!=null)
@@ -191,9 +221,10 @@ import Axios from "axios";
             if(this.state.classification=="patient")
             {
             this.addPatient();
-            
-            
-
+            }
+            else if (this.state.classification=="doctor")
+            {
+                this.addDoctor();
             }
 
 

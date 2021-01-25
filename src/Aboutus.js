@@ -66,7 +66,7 @@ import Login from './Login.js';
                     </div>
                 </Navbar>
 
-<header class="jumbotron">
+  <header class="jumbotron" style={{margin:0,paddingBottom:0}}>
         <div class="container">
             <div class="col-12 col-sm align-self-center">
                 <img src={logo1} class="img-fluid"></img>
@@ -77,6 +77,7 @@ import Login from './Login.js';
     </header>
 
 <body>
+<div style={{backgroundColor:"red"}}> 
     <div class="row">
      <div class="col-10 offset-2 col-sm-6" style={{backgroundColor: "lightblue", color: "white",fontSize:"30px",fontStyle:"italic"}}>
     
@@ -103,7 +104,7 @@ while following shariah and the law of the land.
     
       </div>
       </div>
-
+</div>
 </body>
 
 {/*footer*/}

@@ -10,7 +10,7 @@ import Aboutus from './Aboutus.js';
 import FormComponent from './FormComponent.js';
 import Login from './Login.js';
 import PatientRecord from './PatientRecord.js';
-
+import DoctorsRecord from './DoctorsRecord.js';
 
 function App() {
   
@@ -27,6 +27,8 @@ function App() {
     <Route exact path="/aboutus" component={Aboutus}></Route>
     <Route exact path="/home" component={Home}></Route>
     <Route exact path="/patientRecord" component={PatientRecord}></Route>
+    <Route exact path="/DoctorsRecord" component={DoctorsRecord}></Route>
+   
 </Switch>
 
     </div>
